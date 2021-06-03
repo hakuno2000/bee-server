@@ -1,9 +1,11 @@
 package com.example.bee.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Getter @Setter
@@ -28,4 +30,8 @@ public class Account {
 
     @Column(name = "type", nullable = false)
     private Integer type;
+
+    @JsonBackReference(value = "orderdetail_account")
+    @OneToMany(mappedBy = "account")
+    private Set<OrderDetail> orderDetails;
 }
