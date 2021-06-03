@@ -31,4 +31,9 @@ public class AccountController {
         if (matchedAccount == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(matchedAccount);
     }
+
+    @GetMapping("/accounts")
+    public ResponseEntity<Object> getAllAccounts() {
+        return ResponseEntity.ok(accountService.findAll());
+    }
 }
