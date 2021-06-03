@@ -11,4 +11,6 @@ import java.util.List;
 public interface OrderRepo extends JpaRepository<Order, Long> {
     List<Order> findOrdersBySenderPhone(String phone);
     List<Order> findOrdersBySenderName(String senderName);
+    List<Order> findOrdersByStatus(Boolean status);
+    List<Order> findOrdersByAccount_PhoneAndStatus(String account_phone, Boolean status);
 }

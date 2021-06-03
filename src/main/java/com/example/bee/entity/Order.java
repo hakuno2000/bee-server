@@ -1,16 +1,16 @@
 package com.example.bee.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Order {
     private String item;
 
     @Column(name = "value", nullable = false)
-    private String value;
+    private Long value;
 
     @Column(name = "weight", nullable = false)
     private Double weight;
@@ -49,8 +49,16 @@ public class Order {
     @Column(name = "receiver_address", nullable = false)
     private String receiverAddress;
 
-    @JsonManagedReference(value = "order_orderdetail")
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "order_detail", referencedColumnName = "id")
-    private OrderDetail orderDetail;
+    @Column(name = "ordered_date", nullable = false)
+    private LocalDate orederedDate;
+
+    @Column(name = "sent_date", nullable = false)
+    private LocalDate sentDate;
+
+    @Column(name = "received_date", nullable = false)
+    private LocalDate receivedDate;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "shipper_id", referencedColumnName = "id")
+    private Account account;
 }

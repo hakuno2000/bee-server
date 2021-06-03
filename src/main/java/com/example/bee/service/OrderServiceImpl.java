@@ -26,4 +26,24 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> findAll() {
         return orderRepo.findAll();
     }
+
+    @Override
+    public List<Order> findOrdersNotCompleted() {
+        return orderRepo.findOrdersByStatus(false);
+    }
+
+    @Override
+    public List<Order> findShippingOrdersByAccount_Phone(String account_phone) {
+        return orderRepo.findOrdersByAccount_PhoneAndStatus(account_phone, false);
+    }
+
+    @Override
+    public List<Order> findCompletedOrdersByAccount_Phone(String account_phone) {
+        return orderRepo.findOrdersByAccount_PhoneAndStatus(account_phone, true);
+    }
+
+    @Override
+    public void save(Order order) {
+        orderRepo.save(order);
+    }
 }

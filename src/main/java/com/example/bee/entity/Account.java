@@ -1,16 +1,19 @@
 package com.example.bee.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Getter @Setter
 @Entity
-@Table(name = "account")
+@Table(name = "accounts")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +34,7 @@ public class Account {
     @Column(name = "type", nullable = false)
     private Integer type;
 
-    @JsonBackReference(value = "orderdetail_account")
+    @JsonIgnore
     @OneToMany(mappedBy = "account")
-    private Set<OrderDetail> orderDetails;
+    private List<Order> orders;
 }
