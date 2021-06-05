@@ -61,4 +61,8 @@ public class Order {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "shipper_id", referencedColumnName = "id")
     private Account account;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "creator_id", referencedColumnName = "id")
+    private Account creator;
 }

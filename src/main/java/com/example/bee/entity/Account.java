@@ -1,14 +1,11 @@
 package com.example.bee.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Getter @Setter
@@ -37,4 +34,8 @@ public class Account {
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     private List<Order> orders;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "creator")
+    private List<Order> myOrders;
 }
